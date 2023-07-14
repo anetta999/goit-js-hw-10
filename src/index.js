@@ -21,6 +21,9 @@ const selectors = {
 showLoader(selectors.breedsList);
 fetchBreeds()
   .then(breeds => {
+    if (!breeds.length) {
+      throw new Error();
+    }
     selectors.breedsList.innerHTML = createBreedsListMarkup(breeds);
     new SlimSelect({
       select: selectors.breedsList,
@@ -47,6 +50,9 @@ function onBreedSearch(evt) {
   fetchCatByBreed(evt.target.value)
     .then(data => {
       // console.log(data);
+      if (!data.length) {
+        throw new Error();
+      }
       selectors.breedInfo.innerHTML = createBreedInfoMarkup(data);
       selectors.breedInfo.classList.remove('hidden');
     })
