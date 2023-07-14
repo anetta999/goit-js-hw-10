@@ -8,6 +8,7 @@ import 'slim-select/dist/slimselect.css';
 Notiflix.Notify.init({
   position: 'center-top',
   timeout: 3600000,
+  backOverlay: true,
 });
 
 Notiflix.Loading.init({ backgroundColor: 'rgba(0,0,0,0.7)' });
