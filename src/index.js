@@ -8,7 +8,6 @@ import 'slim-select/dist/slimselect.css';
 Notiflix.Notify.init({
   position: 'center-top',
   timeout: 3600000,
-  backOverlay: true,
 });
 
 Notiflix.Loading.init({ backgroundColor: 'rgba(0,0,0,0.7)' });
@@ -19,6 +18,7 @@ const selectors = {
   loader: document.querySelector('.loader'),
 };
 
+let isError = false;
 showLoader(selectors.breedsList);
 fetchBreeds()
   .then(breeds => {
@@ -78,6 +78,9 @@ function createBreedInfoMarkup(data) {
 }
 
 function showLoader(element) {
+  if (isError) {
+    afterError();
+  }
   element.classList.add('hidden');
   Notiflix.Loading.circle();
 }
@@ -87,7 +90,18 @@ function hideLoader() {
 }
 
 function handleError() {
+  isError = true;
+
   Notiflix.Notify.failure(
     'Oops! Something went wrong! Try reloading the page!'
   );
+}
+
+function afterError() {
+  isError = false;
+
+  const notification = document.querySelector('.notiflix-notify-failure');
+  if (notification) {
+    notification.remove();
+  }
 }
