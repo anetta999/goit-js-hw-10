@@ -15,7 +15,6 @@ Notiflix.Loading.init({ backgroundColor: 'rgba(0,0,0,0.7)' });
 const selectors = {
   breedsList: document.querySelector('.breed-select'),
   breedInfo: document.querySelector('.cat-info'),
-  loader: document.querySelector('.loader'),
 };
 
 let isError = false;
@@ -81,6 +80,7 @@ function showLoader(element) {
   if (isError) {
     afterError();
   }
+
   element.classList.add('hidden');
   Notiflix.Loading.circle();
 }
@@ -92,6 +92,7 @@ function hideLoader() {
 function handleError() {
   isError = true;
 
+  selectors.breedInfo.classList.add('hidden');
   Notiflix.Notify.failure(
     'Oops! Something went wrong! Try reloading the page!'
   );

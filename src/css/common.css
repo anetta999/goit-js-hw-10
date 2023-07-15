@@ -39,3 +39,7 @@ body {
 .cat-temperament-title {
   font-weight: 700;
 }
+
+.hidden {
+  display: none;
+}
